@@ -108,9 +108,9 @@
     [self clearItemFrames];
     
     // create new item frame sections
-    _numberOfItemFrameSections = [self.collectionView numberOfSections];
+    _numberOfItemFrameSections = [self.collectionView.dataSource numberOfSectionsInCollectionView:self.collectionView];
     _itemFrameSections = (CGRect **)malloc(sizeof(CGRect *) * _numberOfItemFrameSections);
-    
+
     for (int section = 0; section < _numberOfItemFrameSections; section++) {
         // add new item frames array to sections array
         NSInteger numberOfItemsInSections = [self.collectionView numberOfItemsInSection:section];
@@ -196,8 +196,8 @@
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
 {
     NSMutableArray *layoutAttributes = [NSMutableArray array];
-    NSInteger n = [self.collectionView numberOfSections];
-    
+    NSInteger n = [self.collectionView.dataSource numberOfSectionsInCollectionView:self.collectionView];
+
     for (NSInteger section = 0; section < n; section++) {
         NSIndexPath *sectionIndexPath = [NSIndexPath indexPathForItem:0 inSection:section];
         
