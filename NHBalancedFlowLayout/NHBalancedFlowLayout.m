@@ -407,6 +407,9 @@
         }
         
         CGFloat rowSize = [self viewPortAvailableSize] - (([row count] - 1) * self.minimumInteritemSpacing);
+		if (partition.count == 1 && row.count == 1) {
+			rowSize = MIN(rowSize, [self.delegate collectionView:self.collectionView layout:self preferredSizeForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]].width);
+		}
         for (NSInteger j = i, n = i + [row count]; j < n; j++) {
             CGSize preferredSize = [self.delegate collectionView:self.collectionView layout:self preferredSizeForItemAtIndexPath:[NSIndexPath indexPathForItem:j inSection:section]];
             
