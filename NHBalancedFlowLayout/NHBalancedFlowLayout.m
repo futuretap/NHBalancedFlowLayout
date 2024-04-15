@@ -199,11 +199,15 @@
     NSInteger n = [self.collectionView.dataSource numberOfSectionsInCollectionView:self.collectionView];
 
     for (NSInteger section = 0; section < n; section++) {
+		if ([self.collectionView.dataSource collectionView:self.collectionView numberOfItemsInSection:section] == 0) {
+			continue;
+		}
+		
         NSIndexPath *sectionIndexPath = [NSIndexPath indexPathForItem:0 inSection:section];
         
-        UICollectionViewLayoutAttributes *headerAttributes = [self layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-                                                                                                  atIndexPath:sectionIndexPath];
-        
+		UICollectionViewLayoutAttributes *headerAttributes = [self layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+																								  atIndexPath:sectionIndexPath];
+		
         CGSize size = headerAttributes.frame.size;
         if (size.height != 0 && size.width != 0 && CGRectIntersectsRect(headerAttributes.frame, rect)) {
             [layoutAttributes addObject:headerAttributes];
